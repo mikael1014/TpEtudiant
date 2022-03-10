@@ -2,7 +2,7 @@ package com.example.tpetudiant.service;
 
 import static com.example.tpetudiant.service.Config.BASE_URL;
 
-import com.example.tpetudiant.models.Etudiant;
+import com.example.tpetudiant.models.Specialite;
 
 import java.util.List;
 
@@ -18,18 +18,18 @@ public interface SpecialiteService {
     String URL_SPECIALITE = BASE_URL + "specialite";
 
     @GET(URL_SPECIALITE)
-    Call<List<Etudiant>> getListeEtudiant();
+    Call<List<Specialite>> getListeSpecialite();
 
     @GET(URL_SPECIALITE + "/{id}")
-    Call<Etudiant> getEtudiantById(@Path(value = "id") long idEtudiant);
+    Call<Specialite> getSpecialiteById(@Path(value = "id") long idSpecialite);
 
     @POST(URL_SPECIALITE)
-    Call<Etudiant> saveEtudiant(@Body Etudiant specialite);
+    Call<Specialite> saveSpecialite(@Body Specialite specialite);
 
     @PUT(URL_SPECIALITE + "/{id}")
-    Call<Etudiant> updateEtudiant(@Path(value = "id") Long idEtudiant, @Body Etudiant specialite);
+    Call<Specialite> updateSpecialite(@Path(value = "id") Long idSpecialite, @Body Specialite specialite);
 
     @DELETE(URL_SPECIALITE + "/{id}")
-    Call<Void> deleteEtudiant(@Path("id") Long id);
+    Call<Void> deleteSpecialite(@Path("id") Long id);
 
 }

@@ -18,32 +18,32 @@ import com.example.tpetudiant.models.Etudiant;
 
 import java.util.List;
 
-public class EtudiantAdapter extends RecyclerView.Adapter<EtudiantAdapter.PaysViewHolder>{
-    private final List<Etudiant> paysList;
+public class EtudiantAdapter extends RecyclerView.Adapter<EtudiantAdapter.EtudiantViewHolder>{
+    private final List<Etudiant> etudiantList;
     private int selectedItemPosition;
 
-    public EtudiantAdapter(List<Etudiant> paysList) {
-        this.paysList = paysList;
+    public EtudiantAdapter(List<Etudiant> etudiantList) {
+        this.etudiantList = etudiantList;
     }
 
     @NonNull
     @Override
-    public EtudiantAdapter.PaysViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public EtudiantAdapter.EtudiantViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.item_etudiant, parent, false);
-        return new PaysViewHolder(view);
+        return new EtudiantViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EtudiantAdapter.PaysViewHolder holder, int position) {
-        Etudiant pays = paysList.get(position);
-        holder.tvNom.setText(pays.getNom());
-        holder.tvContinent.setText(pays.getContinent());
+    public void onBindViewHolder(@NonNull EtudiantAdapter.EtudiantViewHolder holder, int position) {
+        Etudiant etudiant = etudiantList.get(position);
+        holder.tvNom.setText(etudiant.getNom());
+        holder.tvPrenom.setText(etudiant.getPrenom());
         holder.itemView.setOnClickListener(view -> {
             Context context = view.getContext();
             Intent intent = new Intent(context, DetailsEtudiantActivity.class);
-//            intent.putExtra("selectedPays", pays);
-            intent.putExtra("idPays", pays.getId());
+//            intent.putExtra("selectedEtudiant", etudiant);
+            intent.putExtra("idEtudiant", etudiant.getId());
             context.startActivity(intent);
         });
 
@@ -55,11 +55,11 @@ public class EtudiantAdapter extends RecyclerView.Adapter<EtudiantAdapter.PaysVi
 
     @Override
     public int getItemCount() {
-        return paysList.size();
+        return etudiantList.size();
     }
 
-    public List<Etudiant> getPaysList() {
-        return paysList;
+    public List<Etudiant> getEtudiantList() {
+        return etudiantList;
     }
 
     public int getSelectedItemPosition() {
@@ -70,14 +70,14 @@ public class EtudiantAdapter extends RecyclerView.Adapter<EtudiantAdapter.PaysVi
         this.selectedItemPosition = selectedItemPosition;
     }
 
-    public static class PaysViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
+    public static class EtudiantViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
         public TextView tvNom;
-        public TextView tvContinent;
+        public TextView tvPrenom;
 
-        public PaysViewHolder(@NonNull View itemView) {
+        public EtudiantViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNom = itemView.findViewById(R.id.tvLNom);
-            tvContinent = itemView.findViewById(R.id.tvLPrenom);
+            tvPrenom = itemView.findViewById(R.id.tvLPrenom);
             itemView.setOnCreateContextMenuListener(this);
         }
 

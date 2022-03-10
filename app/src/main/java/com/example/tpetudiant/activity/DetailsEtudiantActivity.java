@@ -1,9 +1,9 @@
 package com.example.tpetudiant.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tpetudiant.R;
 import com.example.tpetudiant.models.Etudiant;
@@ -39,8 +39,8 @@ public class DetailsEtudiantActivity extends AppCompatActivity {
             public void onResponse(Call<Etudiant> call, Response<Etudiant> response) {
                 if (response.isSuccessful()) {
                     Etudiant etudiant = response.body();
-                    initDetails(String.valueOf(etudiant.getId()), etudiant.getNom(), etudiant.getContinent(),
-                            String.valueOf(etudiant.getSuperficie()), String.valueOf(etudiant.getNombreHabitants()));
+                    initDetails(String.valueOf(etudiant.getId()), etudiant.getNom(), etudiant.getPrenom(),
+                            String.valueOf(etudiant.getMatricule()), String.valueOf(etudiant.getSpecialite()));
                 }
             }
 

@@ -13,37 +13,37 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tpetudiant.R;
-import com.example.tpetudiant.activity.DetailsEtudiantActivity;
-import com.example.tpetudiant.models.Etudiant;
+import com.example.tpetudiant.activity.DetailsSpecialiteActivity;
+import com.example.tpetudiant.models.Specialite;
 
 import java.util.List;
 
-public class SpecialiteAdapter extends RecyclerView.Adapter<SpecialiteAdapter.PaysViewHolder>{
-    private final List<Etudiant> paysList;
+public class SpecialiteAdapter extends RecyclerView.Adapter<SpecialiteAdapter.SpecialiteViewHolder>{
+    private final List<Specialite> specialiteList;
     private int selectedItemPosition;
 
-    public SpecialiteAdapter(List<Etudiant> paysList) {
-        this.paysList = paysList;
+    public SpecialiteAdapter(List<Specialite> specialiteList) {
+        this.specialiteList = specialiteList;
     }
 
     @NonNull
     @Override
-    public SpecialiteAdapter.PaysViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SpecialiteAdapter.SpecialiteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.item_etudiant, parent, false);
-        return new PaysViewHolder(view);
+        View view = layoutInflater.inflate(R.layout.item_specialite, parent, false);
+        return new SpecialiteViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SpecialiteAdapter.PaysViewHolder holder, int position) {
-        Etudiant pays = paysList.get(position);
-        holder.tvNom.setText(pays.getNom());
-        holder.tvContinent.setText(pays.getContinent());
+    public void onBindViewHolder(@NonNull SpecialiteAdapter.SpecialiteViewHolder holder, int position) {
+        Specialite specialite = specialiteList.get(position);
+        holder.tvTitre.setText(specialite.getTitre());
+        holder.tvDescription.setText(specialite.getDescription());
         holder.itemView.setOnClickListener(view -> {
             Context context = view.getContext();
-            Intent intent = new Intent(context, DetailsEtudiantActivity.class);
-//            intent.putExtra("selectedPays", pays);
-            intent.putExtra("idPays", pays.getId());
+            Intent intent = new Intent(context, DetailsSpecialiteActivity.class);
+//            intent.putExtra("selectedSpecialite", specialite);
+            intent.putExtra("idSpecialite", specialite.getId());
             context.startActivity(intent);
         });
 
@@ -55,11 +55,11 @@ public class SpecialiteAdapter extends RecyclerView.Adapter<SpecialiteAdapter.Pa
 
     @Override
     public int getItemCount() {
-        return paysList.size();
+        return specialiteList.size();
     }
 
-    public List<Etudiant> getPaysList() {
-        return paysList;
+    public List<Specialite> getSpecialiteList() {
+        return specialiteList;
     }
 
     public int getSelectedItemPosition() {
@@ -70,14 +70,14 @@ public class SpecialiteAdapter extends RecyclerView.Adapter<SpecialiteAdapter.Pa
         this.selectedItemPosition = selectedItemPosition;
     }
 
-    public static class PaysViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
-        public TextView tvNom;
-        public TextView tvContinent;
+    public static class SpecialiteViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
+        public TextView tvTitre;
+        public TextView tvDescription;
 
-        public PaysViewHolder(@NonNull View itemView) {
+        public SpecialiteViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvNom = itemView.findViewById(R.id.tvLNom);
-            tvContinent = itemView.findViewById(R.id.tvLPrenom);
+            tvTitre = itemView.findViewById(R.id.tvLNom);
+            tvDescription = itemView.findViewById(R.id.tvLPrenom);
             itemView.setOnCreateContextMenuListener(this);
         }
 

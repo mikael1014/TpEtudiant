@@ -6,9 +6,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tpetudiant.R;
-import com.example.tpetudiant.models.Etudiant;
+import com.example.tpetudiant.models.Specialite;
 import com.example.tpetudiant.service.Config;
-import com.example.tpetudiant.service.EtudiantService;
+import com.example.tpetudiant.service.SpecialiteService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,36 +16,36 @@ import retrofit2.Response;
 
 public class DetailsSpecialiteActivity extends AppCompatActivity {
 
-    private EtudiantService etudiantService;
-    private TextView id, nom, continent, superficie, nbreHabitant;
+    private SpecialiteService specialiteService;
+    private TextView id, titre, description, etudiants, nbreHabitant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_etudiant);
+        setContentView(R.layout.activity_details_specialite);
 
-//        Etudiant etudiant = (Etudiant) getIntent().getSerializableExtra("selectedEtudiant");
-        etudiantService = Config.getApiClient().create(EtudiantService.class);
-        long idEtudiant = getIntent().getLongExtra("idEtudiant", 0);
+//        Specialite specialite = (Specialite) getIntent().getSerializableExtra("selectedSpecialite");
+        specialiteService = Config.getApiClient().create(SpecialiteService.class);
+        long idSpecialite = getIntent().getLongExtra("idSpecialite", 0);
         id = findViewById(R.id.tvDId);
-        nom = findViewById(R.id.tvDNom);
-        continent = findViewById(R.id.tvDPrenom);
-        superficie = findViewById(R.id.tvDMatricule);
+        titre = findViewById(R.id.tvDNom);
+        description = findViewById(R.id.tvDPrenom);
+        etudiants = findViewById(R.id.tvDMatricule);
         nbreHabitant = findViewById(R.id.tvDSpecialite);
-        initDetails("", "", "", "","");
+        initDetails("", "", "", "");
 
-        etudiantService.getEtudiantById(idEtudiant).enqueue(new Callback<Etudiant>() {
+        specialiteService.getSpecialiteById(idSpecialite).enqueue(new Callback<Specialite>() {
             @Override
-            public void onResponse(Call<Etudiant> call, Response<Etudiant> response) {
+            public void onResponse(Call<Specialite> call, Response<Specialite> response) {
                 if (response.isSuccessful()) {
-                    Etudiant etudiant = response.body();
-                    initDetails(String.valueOf(etudiant.getId()), etudiant.getNom(), etudiant.getContinent(),
-                            String.valueOf(etudiant.getSuperficie()), String.valueOf(etudiant.getNombreHabitants()));
+                    Specialite specialite = response.body();
+                    initDetails(String.valueOf(specialite.getId()), specialite.getTitre(), specialite.getDescription(),
+                            String.valueOf(specialite.getEtudiants()));
                 }
             }
 
             @Override
-            public void onFailure(Call<Etudiant> call, Throwable t) {
+            public void onFailure(Call<Specialite> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -53,11 +53,10 @@ public class DetailsSpecialiteActivity extends AppCompatActivity {
 
     }
 
-    private void initDetails(String id, String nom, String continent, String superficie, String nbreHabitant) {
+    private void initDetails(String id, String titre, String description, String etudiants) {
         this.id.setText(id);
-        this.nom.setText(nom);
-        this.continent.setText(continent);
-        this.superficie.setText(superficie);
-        this.nbreHabitant.setText(nbreHabitant);
+        this.titre.setText(titre);
+        this.description.setText(description);
+        this.etudiants.setText(etudiants);
     }
 }
