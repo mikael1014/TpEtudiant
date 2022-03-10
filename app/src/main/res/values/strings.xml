@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Tp Etudiant</string>
+    <string name="menu_item_editer">Editer</string>
+    <string name="menu_item_delete">Supprimer</string>
+</resources>
